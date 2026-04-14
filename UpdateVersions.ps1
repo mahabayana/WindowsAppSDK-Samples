@@ -116,7 +116,8 @@ Get-ChildItem -Recurse Directory.Packages.props -Path $PSScriptRoot | foreach-ob
 }
 
 # Derive UseExperimentalWinAppSDK switch from the main package version.
-$isExperimental = $WinAppSDKVersion -match '-experimental'
+# Match 'experimental' anywhere in the prerelease tag (covers -experimental, -ci.experimental, etc.)
+$isExperimental = $WinAppSDKVersion -match 'experimental'
 $switchValue = if ($isExperimental) { 'true' } else { 'false' }
 
 $directoryBuildPropsPath = Join-Path $PSScriptRoot "Samples\Directory.Build.props"
