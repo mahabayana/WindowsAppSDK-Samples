@@ -3,7 +3,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
+#if WINAPPSDK_EXPERIMENTAL
 using Microsoft.Windows.AI.Search.Experimental.AppContentIndex;
+#endif
 using Notes.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -214,6 +216,7 @@ namespace Notes.ViewModels
             await AttachmentProcessor.RemoveAttachment(attachment);
         }
 
+#if WINAPPSDK_EXPERIMENTAL
         public async Task RemoveNoteFromIndexAsync()
         {
             if (MainWindow.AppContentIndexer != null && Note != null)
@@ -351,6 +354,7 @@ namespace Notes.ViewModels
                 Debug.WriteLine("AppContentIndexer is null");
             }
         }
+#endif
 
     }
 }

@@ -2,7 +2,9 @@
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+#if WINAPPSDK_EXPERIMENTAL
 using Microsoft.Windows.AI.Search.Experimental.AppContentIndex;
+#endif
 using Notes.Controls;
 using Notes.Pages;
 using Notes.ViewModels;
@@ -19,16 +21,22 @@ namespace Notes
         private static ChatSessionView? _chatSessionView;
         private static SearchView? _searchView;
         private static MainWindow? _instance;
+#if WINAPPSDK_EXPERIMENTAL
         private static AppContentIndexer? _appContentIndexer;
+#endif
 
         public static ChatSessionView? ChatSessionView => _chatSessionView;
         public static SearchView? SearchView => _searchView;
         public static MainWindow? Instance => _instance;
+#if WINAPPSDK_EXPERIMENTAL
         public static AppContentIndexer? AppContentIndexer => _appContentIndexer;
+#endif
 
         public ViewModel VM;
 
+#if WINAPPSDK_EXPERIMENTAL
         private readonly Task _initializeAppContentIndexerTask;
+#endif
 
         public MainWindow()
         {
@@ -47,6 +55,7 @@ namespace Notes
 
             VM.Notes.CollectionChanged += Notes_CollectionChanged;
 
+#if WINAPPSDK_EXPERIMENTAL
             _initializeAppContentIndexerTask = InitializeAppContentIndexerAsync();
 
             DispatcherQueue.TryEnqueue(async () =>
@@ -63,6 +72,7 @@ namespace Notes
                     // Inspect ex.HResult, Message, InnerException
                 }
             });
+#endif
         }
 
         public async Task SelectNoteById(int id, int? attachmentId = null, string? attachmentText = null, Windows.Foundation.Rect? boundingBox = null)
@@ -93,6 +103,7 @@ namespace Notes
             }
         }
 
+#if WINAPPSDK_EXPERIMENTAL
         private async Task InitializeAppContentIndexerAsync()
         {
             GetOrCreateIndexResult? getOrCreateResult = null;
@@ -132,6 +143,7 @@ namespace Notes
                 }
             });
         }
+#endif
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
@@ -203,6 +215,7 @@ namespace Notes
             AttachmentView.Show();
         }
 
+#if WINAPPSDK_EXPERIMENTAL
         private async Task IndexAllAsync()
         {
             _searchView?.SetSearchBoxInitializingCompleted();
@@ -252,6 +265,7 @@ namespace Notes
         {
             await NoteViewModel.ManualDeleteIndex();
         }
+#endif
     }
 
     internal partial class MenuItemTemplateSelector : DataTemplateSelector

@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 
+#if WINAPPSDK_EXPERIMENTAL
 using Microsoft.Windows.AI.Search.Experimental.AppContentIndex;
+#endif
 using Notes.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -53,7 +55,8 @@ namespace Notes
             var notesFolder = await GetStateFolderAsync();
             return await notesFolder.CreateFolderAsync(AttachmentsFolderName, CreationCollisionOption.OpenIfExists);
         }
-
+
+#if WINAPPSDK_EXPERIMENTAL
         public static async Task<List<SearchResult>> SearchAsync(AppContentIndexer appContentIndexer, string searchText, int top = 5, CancellationToken cancellationToken = default)
         {
             var results = new List<SearchResult>();
@@ -208,6 +211,7 @@ namespace Notes
             }
             return results;
         }
+#endif
     }
 
     public record SearchResult

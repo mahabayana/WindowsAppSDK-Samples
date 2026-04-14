@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 
+#if WINAPPSDK_EXPERIMENTAL
 using Microsoft.Windows.AI.Search.Experimental.AppContentIndex;
+#endif
 using Notes.Models;
 using System;
 using System.Collections.Generic;
@@ -39,7 +41,8 @@ namespace Notes
                 _isProcessing = false;
             }
         }
-
+
+#if WINAPPSDK_EXPERIMENTAL
         public async static Task RemoveAttachment(Attachment attachment)
         {
             if (MainWindow.AppContentIndexer != null)
@@ -144,6 +147,7 @@ namespace Notes
                 await context.SaveChangesAsync();
             }
         }
+#endif
 
         private async static Task<string> SaveTextToFileAsync(string text, string filename)
         {
