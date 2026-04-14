@@ -31,6 +31,10 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# build-report.ps1 outputs
+build-logs/
+build-report-*.json
+
 # Downloaded model files (these will be downloaded during build)
 Samples/WindowsML/Resources/obj/
 
