@@ -41,7 +41,7 @@ namespace Notes
                 _isProcessing = false;
             }
         }
-
+
 #if WINAPPSDK_EXPERIMENTAL
         public async static Task RemoveAttachment(Attachment attachment)
         {
@@ -147,7 +147,6 @@ namespace Notes
                 await context.SaveChangesAsync();
             }
         }
-#endif
 
         private async static Task<string> SaveTextToFileAsync(string text, string filename)
         {
@@ -170,6 +169,7 @@ namespace Notes
                 });
             }
         }
+#endif
     }
 
     public class AttachmentProcessedEventArgs

@@ -55,7 +55,7 @@ namespace Notes
             var notesFolder = await GetStateFolderAsync();
             return await notesFolder.CreateFolderAsync(AttachmentsFolderName, CreationCollisionOption.OpenIfExists);
         }
-
+
 #if WINAPPSDK_EXPERIMENTAL
         public static async Task<List<SearchResult>> SearchAsync(AppContentIndexer appContentIndexer, string searchText, int top = 5, CancellationToken cancellationToken = default)
         {
